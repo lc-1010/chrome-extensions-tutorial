@@ -1,36 +1,39 @@
 const tabs = await chrome.tabs.query({
-    url:[
+    url: [
         "https://developer.chrome.com/docs/extensions/*",
-        "https://developer.chrome.com/docs/webstore/*"  
+        "https://developer.chrome.com/docs/webstore/*"
     ]
 });
 
 const collator = new Intl.Collator();
-tabs.sort((a,b) => collator.compare(a.title,b.title));
+tabs.sort((a, b) => collator.compare(a.title, b.title));
+console.log(tabs);
 
 const template = document.getElementById('li_template');
-const elements= new Set();
+const elements = new Set();
 
-for (const tab of tabs){
+for (const tab of tabs) {
     const element = template.content.firstElementChild.cloneNode(true);
-    
+
     const title = tab.title.split('|')[0].trim();
     const pahtname = new URL(tab.url).pathname.slice('/docs'.length);
-    
+
     element.querySelector('.title').textContent = title;
     element.querySelector('.pathname').textContent = pahtname;
-    element.querySelector('a').addEventListener('click', async()=>{
-        await chrome.tabs.update(tab.id, {active:true});
-        await chrome.windows.update(tab.windowId,{focused:true});
+    element.querySelector('a').addEventListener('click', async () => {
+        await chrome.tabs.update(tab.id, { active: true });
+        await chrome.windows.update(tab.windowId, { focused: true });
     });
     elements.add(element);
 }
 
-document.querySelector('url').append(...elements);
+let b = document.querySelector('ul');
+console.log(b);
+b.append(...elements);
 
 const button = document.querySelector('button');
-button.addEventListener('click', async()=>{
-    const tabIds = tabs.map(({id})=>id);/*
+button.addEventListener('click', async () => {
+    const tabIds = tabs.map(({ id }) => id);/*
     这段代码使用了几种现代 JavaScript 语法特性。让我来解释一下：
 
 ```javascript:chrome-extensions-tutorial/4-tabs-manager/popup.js
@@ -74,8 +77,9 @@ const tabIds = tabs.map(tab => tab.id);
 
 这种简洁的语法在现代 JavaScript 开发中很常见，特别是在处理数组和对象时。它使代码更加简洁和表达性强，但对于不熟悉这些特性的开发者来说可能需要一些时间来适应。
 */
-    if(tabIds.lenght){
-        const group = await chrome.tabs.group({tabIds});
-        await chrome.tabGroup.update(group,{title:'DOCS'});
+    if (tabIds.length) {
+        const group = await chrome.tabs.group({ tabIds });
+        await chrome.tabGroups.update(group, { title: 'chrome DOCS' });
     }
+    console.log(tabIds.length);
 });
