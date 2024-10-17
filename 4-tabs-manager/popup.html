@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Manager</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <template id="li_template">
+        <li>
+            <a>
+                <h3 class="title">Tab Title</h3>
+                <p class="pathname">Tab Pathname</p>
+            </a>
+        </li>
+    </template>
+    <h1>Google Dev Docs</h1>
+    <button>Group Tabs</button>
+    <ul></ul>
+    <script src="popup.js" type="module"></script>
+    <!-- 
+       您可以通过向脚本添加 type="module" 来使用顶级 await 标记。
+       
+1. 在JavaScript中，`await` 关键字通常只能在 `async` 函数内部使用。
+
+2. 但是，如果你将脚本标记为模块（module），你就可以在顶级作用域（即不在任何函数内部）使用 `await`。这就是所谓的"顶级 await"。
+
+3. 要将脚本标记为模块，你需要在 `<script>` 标签中添加 `type="module"` 属性。
+
+这行代码将 `popup.js` 文件作为模块引入，这意味着在 `popup.js` 中，你可以在顶级作用域使用 `await`，而不需要将代码包装在 `async` 函数中。
+     -->
+</body>
+</html>

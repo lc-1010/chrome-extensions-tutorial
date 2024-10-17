@@ -1,0 +1,28 @@
+{
+// 使用 Action API 创建扩展程序弹出式窗口。
+// 使用 Tabs API 查询特定标签页。
+// 通过狭窄的主机权限保护用户隐私。
+// 更改标签页的焦点。
+// 将标签页移至同一窗口并对其进行分组。
+// 使用 TabGroups API 重命名标签页分组。
+
+    "manifest_version": 3,
+    "name": "Tab Manager for Chrome Dev Docs",
+    "version": "1.0",
+    "description": "A simple extension that manages tabs in Google Chrome Dev Docs",
+    "icons": {
+        "16": "images/icon-16.png",
+        "32": "images/icon-32.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+    },
+    "action": {
+        "default_popup": "popup.html" // 打开一个弹出式窗口
+    },
+    "permissions": [
+        "tabGroups"
+    ],
+    "host_permissions": [//通过缩小主机权限范围，我们可以向特定网站授予超出规定的权限
+        "https://developer.chrome.com/*"
+    ]
+}
